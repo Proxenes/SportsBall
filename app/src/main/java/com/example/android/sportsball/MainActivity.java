@@ -2,8 +2,14 @@ package com.example.android.sportsball;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,37 +17,106 @@ public class MainActivity extends AppCompatActivity {
     int teamAScore = 0;
     int teamBScore = 0;
 
+    // Variables used to store the team names
+    String teamAText = "";
+    String teamBText = "";
+
     @Override
     protected void onCreate(Bundle scores) {
         super.onCreate(scores);
         setContentView(R.layout.activity_main);
 
-        // Restores the scores of each team if the activity is destroyed and recreated
+        // Restores the scores and names of each team if the activity is destroyed and recreated
         if(scores != null) {
             teamAScore = scores.getInt("teamAScore");
             teamBScore = scores.getInt("teamBScore");
+            teamAText = scores.getString("teamAText");
+            teamBText = scores.getString("teamBText");
 
             displayForTeamA(teamAScore);
             displayForTeamB(teamBScore);
+
+
+            // If team names have already been entered, prevents the team names from
+            // being editable again
+            if(teamAText.isEmpty() == false) {
+                EditText teamA = findViewById(R.id.team_a);
+                teamA.setEnabled(false);
+                teamA.setBackgroundResource(android.R.color.transparent);
+                teamA.setTextColor(getResources().getColor(android.R.color.black));
+            }
+
+            if(teamBText.isEmpty() == false) {
+                EditText teamB = findViewById(R.id.team_b);
+                teamB.setEnabled(false);
+                teamB.setBackgroundResource(android.R.color.transparent);
+                teamB.setTextColor(getResources().getColor(android.R.color.black));
+            }
         }
 
-        // Test functionality of below method(s)
-        // displayForTeamA(8);
+        // Set editor listeners for enter key functionality
+        final EditText teamA = findViewById(R.id.team_a);
+        teamA.setOnEditorActionListener(editorListenerA);
 
-        // Set the value of teamAScore to the text value of the
-        // team_a_score TextView
-        // TextView teamAScoreTextView = findViewById(R.id.team_a_score);
-        // teamAScore = Integer.parseInt(teamAScoreTextView.getText().toString());
+        final EditText teamB = findViewById(R.id.team_b);
+        teamB.setOnEditorActionListener(editorListenerB);
+
+        // Clears hint text when tapping on team name EditTexts
+        teamA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                teamA.setHint(hasFocus ? "" : getString(R.string.team_a_name));
+            }
+        });
+
+        teamB.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                teamB.setHint(hasFocus ? "" : getString(R.string.team_b_name));
+            }
+        });
     }
 
     /**
-     * Saves the scores of each team to the scores Bundles to be
+     * Create action listener for keyboard enter press for Team A Name
+     */
+    public TextView.OnEditorActionListener editorListenerA = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            EditText teamA = findViewById(R.id.team_a);
+            teamA.setEnabled(false);
+            teamA.setBackgroundResource(android.R.color.transparent);
+            teamA.setTextColor(getResources().getColor(android.R.color.black));
+            teamAText = teamA.getText().toString();
+            return false;
+        }
+    };
+
+    /**
+     * Create action listener for keyboard enter press for Team B Name
+     */
+    public TextView.OnEditorActionListener editorListenerB = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            EditText teamB = findViewById(R.id.team_b);
+            teamB.setEnabled(false);
+            teamB.setBackgroundResource(android.R.color.transparent);
+            teamB.setTextColor(getResources().getColor(android.R.color.black));
+            teamBText = teamB.getText().toString();
+            return false;
+        }
+    };
+
+    /**
+     * Saves the scores and names of each team to the scores Bundles to be
      * restored if the activity is destroyed
      */
     protected void onSaveInstanceState(Bundle scores) {
         super.onSaveInstanceState(scores);
         scores.putInt("teamAScore", teamAScore);
         scores.putInt("teamBScore", teamBScore);
+        scores.putString("teamAText", teamAText);
+        scores.putString("teamBText", teamBText);
     }
 
     /**
@@ -108,8 +183,8 @@ public class MainActivity extends AppCompatActivity {
      * Displays the total score for Team B in the team_a_score TextView
      */
     public void displayForTeamB(int score) {
-        TextView teamAScoreTextView = (findViewById(R.id.team_b_score));
-        teamAScoreTextView.setText(String.valueOf(score));
+        TextView teamBScoreTextView = (findViewById(R.id.team_b_score));
+        teamBScoreTextView.setText(String.valueOf(score));
     }
 
     /**
@@ -118,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void teamBTouchdown(View view) {
         teamBScore += 6;
-        displayForTeamA(teamBScore);
+        displayForTeamB(teamBScore);
     }
 
     /**
@@ -127,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void teamBExtraPoint(View view) {
         teamBScore += 1;
-        displayForTeamA(teamBScore);
+        displayForTeamB(teamBScore);
     }
 
     /**
@@ -136,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void teamBTwoPoints(View view) {
         teamBScore += 2;
-        displayForTeamA(teamBScore);
+        displayForTeamB(teamBScore);
     }
 
     /**
@@ -145,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void teamBFieldGoal(View view) {
         teamBScore += 3;
-        displayForTeamA(teamBScore);
+        displayForTeamB(teamBScore);
     }
 
     /**
@@ -154,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void teamBSafety(View view) {
         teamBScore += 2;
-        displayForTeamA(teamBScore);
+        displayForTeamB(teamBScore);
     }
 
     /**
