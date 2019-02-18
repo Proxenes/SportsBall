@@ -27,7 +27,7 @@
                     android:id="@+id/team_a"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Team A Name"
+                    android:hint="@string/team_a_name"
                     android:layout_margin="16dp"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center_horizontal" />
@@ -112,15 +112,15 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <EditText
+                    android:inputType="text"
+                    android:id="@+id/team_b"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/team_b_name"
                     android:layout_margin="16dp"
                     android:fontFamily="sans-serif-medium"
-                    android:gravity="center_horizontal"
-                    android:text="@string/team_b"
-                    android:textColor="#616161"
-                    android:textSize="14sp" />
+                    android:gravity="center_horizontal" />
 
                 <TextView
                     android:id="@+id/team_b_score"

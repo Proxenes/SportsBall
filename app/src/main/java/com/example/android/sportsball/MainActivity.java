@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     // Variables used to store the total score for Team A and Team B
@@ -29,25 +31,53 @@ public class MainActivity extends AppCompatActivity {
             displayForTeamB(teamBScore);
         }
 
-        EditText teamA = findViewById(R.id.team_a);
-        teamA.setOnEditorActionListener(editorListener);
+        // Set editor listeners for enter key functionality
+        final EditText teamA = findViewById(R.id.team_a);
+        teamA.setOnEditorActionListener(editorListenerA);
 
-        // Test functionality of below method(s)
-        // displayForTeamA(8);
+        final EditText teamB = findViewById(R.id.team_b);
+        teamB.setOnEditorActionListener(editorListenerB);
 
-        // Set the value of teamAScore to the text value of the
-        // team_a_score TextView
-        // TextView teamAScoreTextView = findViewById(R.id.team_a_score);
-        // teamAScore = Integer.parseInt(teamAScoreTextView.getText().toString());
+        // Clears hint text when tapping on team name EditTexts
+        teamA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                teamA.setHint(hasFocus ? "" : getString(R.string.team_a_name));
+            }
+        });
+
+        teamB.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                teamB.setHint(hasFocus ? "" : getString(R.string.team_b_name));
+            }
+        });
     }
 
-    public TextView.OnEditorActionListener editorListener = new TextView.OnEditorActionListener() {
+    /**
+     * Create action listener for keyboard enter press for Team A Name
+     */
+    public TextView.OnEditorActionListener editorListenerA = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             EditText teamA = findViewById(R.id.team_a);
             teamA.setEnabled(false);
             teamA.setBackgroundResource(android.R.color.transparent);
-            teamA.setTextColor(getResources().getColor(android.R.color.black));
+            teamA.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            return false;
+        }
+    };
+
+    /**
+     * Create action listener for keyboard enter press for Team B Name
+     */
+    public TextView.OnEditorActionListener editorListenerB = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            EditText teamB = findViewById(R.id.team_b);
+            teamB.setEnabled(false);
+            teamB.setBackgroundResource(android.R.color.transparent);
+            teamB.setTextColor(getResources().getColor(android.R.color.darker_gray));
             return false;
         }
     };
@@ -183,10 +213,5 @@ public class MainActivity extends AppCompatActivity {
         teamBScore = 0;
         displayForTeamA(teamAScore);
         displayForTeamB(teamBScore);
-    }
-
-    public void setOnEditorActionListener(TextView view)
-    {
-
     }
 }
