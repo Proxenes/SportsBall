@@ -22,15 +22,15 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <EditText
+                    android:inputType="text"
+                    android:id="@+id/team_a"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Team A Name"
                     android:layout_margin="16dp"
                     android:fontFamily="sans-serif-medium"
-                    android:gravity="center_horizontal"
-                    android:text="@string/team_a"
-                    android:textColor="#616161"
-                    android:textSize="14sp" />
+                    android:gravity="center_horizontal" />
 
                 <TextView
                     android:id="@+id/team_a_score"
@@ -45,58 +45,58 @@
 
                 <Button
                     android:id="@+id/team_a_touchdown"
-                    android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="8dp"
                     android:onClick="teamATouchdown"
-                    android:text="@string/touchdown_button" />
+                    android:text="@string/touchdown_button"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/team_a_extra_point"
-                    android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="8dp"
                     android:onClick="teamAExtraPoint"
-                    android:text="@string/extra_point_button" />
+                    android:text="@string/extra_point_button"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/team_a_2_points"
-                    android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="8dp"
                     android:onClick="teamATwoPoints"
-                    android:text="@string/two_point_button" />
+                    android:text="@string/two_point_button"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/team_a_field_goal"
-                    android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="8dp"
                     android:onClick="teamAFieldGoal"
-                    android:text="@string/field_goal_button" />
+                    android:text="@string/field_goal_button"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/team_a_safety"
-                    android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="8dp"
                     android:onClick="teamASafety"
-                    android:text="@string/safety_button" />
+                    android:text="@string/safety_button"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 
@@ -135,58 +135,58 @@
 
                 <Button
                     android:id="@+id/team_b_touchdown"
-                    android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="8dp"
                     android:onClick="teamBTouchdown"
-                    android:text="@string/touchdown_button" />
+                    android:text="@string/touchdown_button"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/team_B_extra_point"
-                    android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="8dp"
                     android:onClick="teamBExtraPoint"
-                    android:text="@string/extra_point_button" />
+                    android:text="@string/extra_point_button"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/team_B_2_points"
-                    android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="8dp"
                     android:onClick="teamBTwoPoints"
-                    android:text="@string/two_point_button" />
+                    android:text="@string/two_point_button"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/team_b_field_goal"
-                    android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="8dp"
                     android:onClick="teamBFieldGoal"
-                    android:text="@string/field_goal_button" />
+                    android:text="@string/field_goal_button"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/team_b_safety"
-                    android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="8dp"
                     android:onClick="teamBSafety"
-                    android:text="@string/safety_button" />
+                    android:text="@string/safety_button"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 
@@ -198,13 +198,13 @@
 
         <Button
             android:id="@+id/reset_button"
-            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="32dp"
             android:onClick="resetScores"
-            android:text="@string/reset_button" />
+            android:text="@string/reset_button"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 </ScrollView>

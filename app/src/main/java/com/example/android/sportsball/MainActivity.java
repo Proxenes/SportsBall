@@ -2,8 +2,12 @@ package com.example.android.sportsball;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
             displayForTeamB(teamBScore);
         }
 
+        EditText teamA = findViewById(R.id.team_a);
+        teamA.setOnEditorActionListener(editorListener);
+
         // Test functionality of below method(s)
         // displayForTeamA(8);
 
@@ -33,6 +40,17 @@ public class MainActivity extends AppCompatActivity {
         // TextView teamAScoreTextView = findViewById(R.id.team_a_score);
         // teamAScore = Integer.parseInt(teamAScoreTextView.getText().toString());
     }
+
+    public TextView.OnEditorActionListener editorListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            EditText teamA = findViewById(R.id.team_a);
+            teamA.setEnabled(false);
+            teamA.setBackgroundResource(android.R.color.transparent);
+            teamA.setTextColor(getResources().getColor(android.R.color.black));
+            return false;
+        }
+    };
 
     /**
      * Saves the scores of each team to the scores Bundles to be
@@ -108,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
      * Displays the total score for Team B in the team_a_score TextView
      */
     public void displayForTeamB(int score) {
-        TextView teamAScoreTextView = (findViewById(R.id.team_b_score));
-        teamAScoreTextView.setText(String.valueOf(score));
+        TextView teamBScoreTextView = (findViewById(R.id.team_b_score));
+        teamBScoreTextView.setText(String.valueOf(score));
     }
 
     /**
@@ -118,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void teamBTouchdown(View view) {
         teamBScore += 6;
-        displayForTeamA(teamBScore);
+        displayForTeamB(teamBScore);
     }
 
     /**
@@ -127,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void teamBExtraPoint(View view) {
         teamBScore += 1;
-        displayForTeamA(teamBScore);
+        displayForTeamB(teamBScore);
     }
 
     /**
@@ -136,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void teamBTwoPoints(View view) {
         teamBScore += 2;
-        displayForTeamA(teamBScore);
+        displayForTeamB(teamBScore);
     }
 
     /**
@@ -145,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void teamBFieldGoal(View view) {
         teamBScore += 3;
-        displayForTeamA(teamBScore);
+        displayForTeamB(teamBScore);
     }
 
     /**
@@ -154,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void teamBSafety(View view) {
         teamBScore += 2;
-        displayForTeamA(teamBScore);
+        displayForTeamB(teamBScore);
     }
 
     /**
@@ -165,5 +183,10 @@ public class MainActivity extends AppCompatActivity {
         teamBScore = 0;
         displayForTeamA(teamAScore);
         displayForTeamB(teamBScore);
+    }
+
+    public void setOnEditorActionListener(TextView view)
+    {
+
     }
 }
