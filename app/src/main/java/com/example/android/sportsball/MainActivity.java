@@ -17,18 +17,41 @@ public class MainActivity extends AppCompatActivity {
     int teamAScore = 0;
     int teamBScore = 0;
 
+    // Variables used to store the team names
+    String teamAText = "";
+    String teamBText = "";
+
     @Override
     protected void onCreate(Bundle scores) {
         super.onCreate(scores);
         setContentView(R.layout.activity_main);
 
-        // Restores the scores of each team if the activity is destroyed and recreated
+        // Restores the scores and names of each team if the activity is destroyed and recreated
         if(scores != null) {
             teamAScore = scores.getInt("teamAScore");
             teamBScore = scores.getInt("teamBScore");
+            teamAText = scores.getString("teamAText");
+            teamBText = scores.getString("teamBText");
 
             displayForTeamA(teamAScore);
             displayForTeamB(teamBScore);
+
+
+            // If team names have already been entered, prevents the team names from
+            // being editable again
+            if(teamAText.isEmpty() == false) {
+                EditText teamA = findViewById(R.id.team_a);
+                teamA.setEnabled(false);
+                teamA.setBackgroundResource(android.R.color.transparent);
+                teamA.setTextColor(getResources().getColor(android.R.color.black));
+            }
+
+            if(teamBText.isEmpty() == false) {
+                EditText teamB = findViewById(R.id.team_b);
+                teamB.setEnabled(false);
+                teamB.setBackgroundResource(android.R.color.transparent);
+                teamB.setTextColor(getResources().getColor(android.R.color.black));
+            }
         }
 
         // Set editor listeners for enter key functionality
@@ -63,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
             EditText teamA = findViewById(R.id.team_a);
             teamA.setEnabled(false);
             teamA.setBackgroundResource(android.R.color.transparent);
-            teamA.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            teamA.setTextColor(getResources().getColor(android.R.color.black));
+            teamAText = teamA.getText().toString();
             return false;
         }
     };
@@ -77,19 +101,22 @@ public class MainActivity extends AppCompatActivity {
             EditText teamB = findViewById(R.id.team_b);
             teamB.setEnabled(false);
             teamB.setBackgroundResource(android.R.color.transparent);
-            teamB.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            teamB.setTextColor(getResources().getColor(android.R.color.black));
+            teamBText = teamB.getText().toString();
             return false;
         }
     };
 
     /**
-     * Saves the scores of each team to the scores Bundles to be
+     * Saves the scores and names of each team to the scores Bundles to be
      * restored if the activity is destroyed
      */
     protected void onSaveInstanceState(Bundle scores) {
         super.onSaveInstanceState(scores);
         scores.putInt("teamAScore", teamAScore);
         scores.putInt("teamBScore", teamBScore);
+        scores.putString("teamAText", teamAText);
+        scores.putString("teamBText", teamBText);
     }
 
     /**
