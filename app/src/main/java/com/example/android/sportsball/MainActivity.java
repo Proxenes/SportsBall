@@ -1,5 +1,7 @@
 package com.example.android.sportsball;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -240,5 +242,19 @@ public class MainActivity extends AppCompatActivity {
         teamBScore = 0;
         displayForTeamA(teamAScore);
         displayForTeamB(teamBScore);
+
+        EditText teamA = findViewById(R.id.team_a);
+        teamA.setEnabled(true);
+        teamA.setText("");
+        teamA.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        teamA.setHint(getString(R.string.team_a_name));
+
+        EditText teamB = findViewById(R.id.team_b);
+        teamB.setEnabled(true);
+        teamB.setText("");
+        teamB.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        teamB.setHint(getString(R.string.team_b_name));
     }
+
+
 }
