@@ -2,6 +2,7 @@ package com.example.android.sportsball;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -86,10 +87,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             EditText teamA = findViewById(R.id.team_a);
-            teamA.setEnabled(false);
             teamA.setBackgroundResource(android.R.color.transparent);
             teamA.setTextColor(getResources().getColor(android.R.color.black));
             teamAText = teamA.getText().toString();
+            teamA.clearFocus();
+            teamA.setEnabled(false);
             return false;
         }
     };
@@ -101,10 +103,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             EditText teamB = findViewById(R.id.team_b);
-            teamB.setEnabled(false);
             teamB.setBackgroundResource(android.R.color.transparent);
             teamB.setTextColor(getResources().getColor(android.R.color.black));
             teamBText = teamB.getText().toString();
+            teamB.clearFocus();
+            teamB.setEnabled(false);
             return false;
         }
     };
